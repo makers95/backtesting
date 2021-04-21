@@ -1,9 +1,9 @@
 package com.stream.backtesting.save;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.stream.backtesting.mapper.StockMapper;
-import com.stream.backtesting.model.stock;
-import com.stream.backtesting.model.stockEnum;
+import com.stream.crawler.mapper.StockMapper;
+import com.stream.crawler.model.stock;
+import com.stream.crawler.model.stockEnum;
 import com.stream.crawler.read.get_1;
 import com.stream.crawler.parse.parse_1;
 import org.junit.jupiter.api.Test;

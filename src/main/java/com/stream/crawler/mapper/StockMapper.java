@@ -1,7 +1,7 @@
-package com.stream.backtesting.mapper;
+package com.stream.crawler.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.stream.backtesting.model.stock_detail;
+import com.stream.crawler.model.stock;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  * @return $
  **/
 @Repository
-public interface StockDetailMapper extends BaseMapper<stock_detail> {
+public interface StockMapper extends BaseMapper<stock> {
 }

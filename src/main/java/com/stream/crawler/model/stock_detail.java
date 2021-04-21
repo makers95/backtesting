@@ -1,4 +1,4 @@
-package com.stream.backtesting.model;
+package com.stream.crawler.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

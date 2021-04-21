@@ -1,4 +1,4 @@
-package com.stream.backtesting.model;
+package com.stream.crawler.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

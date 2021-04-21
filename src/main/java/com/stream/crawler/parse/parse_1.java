@@ -1,17 +1,14 @@
 package com.stream.crawler.parse;
 
 
-import com.stream.backtesting.model.stock;
-import com.stream.backtesting.model.stockEnum;
+import com.stream.crawler.model.stock;
+import com.stream.crawler.model.stockEnum;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
 import java.time.chrono.MinguoChronology;
@@ -19,8 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DecimalStyle;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class parse_1 {
