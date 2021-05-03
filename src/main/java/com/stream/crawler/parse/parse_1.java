@@ -1,8 +1,8 @@
 package com.stream.crawler.parse;
 
 
-import com.stream.crawler.model.stock;
-import com.stream.crawler.model.stockEnum;
+import com.stream.crawler.model.Stock;
+import com.stream.crawler.model.StockEnum;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -22,15 +22,15 @@ public class parse_1 {
     public parse_1() {
     }
 
-    public static ArrayList<stock> parseData_1(String source) throws ParseException {
+    public static ArrayList<Stock> parseData_1(String source) throws ParseException {
 
         Document doc = Jsoup.parse(source);
         Elements tds = doc.select("td");
 
-        ArrayList<stock> stocks = new ArrayList<>();
+        ArrayList<Stock> Stocks = new ArrayList<>();
 
         for (int i = 0; i < tds.size(); i = i + 2) {
-            stock stock = new stock();
+            Stock stock = new Stock();
             String skip = "日　期";
             String skip_1 = "發行量加權股價報酬指數";
 
@@ -51,13 +51,13 @@ public class parse_1 {
             LocalDate localDate = LocalDate.from(taiwan_date);
 
             Float price = Float.parseFloat(column_price.replace(",", ""));
-            stock.setSId(localDate.toString().replace("-", "") + stockEnum.taiex_total_return.getStockCode());
+            stock.setSId(localDate.toString().replace("-", "") + StockEnum.taiex_total_return.getStockCode());
             stock.setDate(localDate);
             stock.setName("TAIEX_TotalReturn");
             stock.setPrice(price);
-            stocks.add(stock);
+            Stocks.add(stock);
         }
-        return stocks;
+        return Stocks;
     }
 
 

@@ -2,8 +2,8 @@ package com.stream.backtesting.save;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stream.crawler.mapper.StockDetailMapper;
-import com.stream.crawler.model.stockEnum;
-import com.stream.crawler.model.stock_detail;
+import com.stream.crawler.model.StockEnum;
+import com.stream.crawler.model.StockDetail;
 import com.stream.crawler.parse.parse_2;
 import com.stream.crawler.read.get_1;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  **/
 
 @SpringBootTest
-public class twse {
+public class Twse {
 
     @Resource
     private StockDetailMapper stockDetailMapper;
@@ -35,16 +35,16 @@ public class twse {
         String source = get_1.doGet(url);
 
         //check repeat
-        QueryWrapper<stock_detail> wrapper = new QueryWrapper<>();
+        QueryWrapper<StockDetail> wrapper = new QueryWrapper<>();
         wrapper.likeRight("stockId",timeParam.substring(0,6));
-        wrapper.likeLeft("stockId", stockEnum.taiex.getStockCode());
-        List<stock_detail> stocks_old = stockDetailMapper.selectList(wrapper);
+        wrapper.likeLeft("stockId", StockEnum.taiex.getStockCode());
+        List<StockDetail> stocks_old = stockDetailMapper.selectList(wrapper);
         Set<String> stockId_old = stocks_old.stream().map(stock -> stock.getSId()).collect(Collectors.toSet());
 
-                ArrayList<stock_detail> stocks = new ArrayList<>();
+                ArrayList<StockDetail> stocks = new ArrayList<>();
                 stocks = parse_2.parse(source);
 
-                for (stock_detail stock : stocks) {
+                for (StockDetail stock : stocks) {
                     if(!stockId_old.contains(stock.getSId())){
                         System.out.println(stock);
                         stockDetailMapper.insert(stock);
@@ -74,19 +74,19 @@ public class twse {
 
 
         //check repeat
-        QueryWrapper<stock_detail> wrapper = new QueryWrapper<>();
-        wrapper.likeLeft("stockId", stockEnum.taiex.getStockCode());
-        List<stock_detail> stocks_old = stockDetailMapper.selectList(wrapper);
+        QueryWrapper<StockDetail> wrapper = new QueryWrapper<>();
+        wrapper.likeLeft("stockId", StockEnum.taiex.getStockCode());
+        List<StockDetail> stocks_old = stockDetailMapper.selectList(wrapper);
         Set<String> stockId_old = stocks_old.stream().map(stock -> stock.getSId()).collect(Collectors.toSet());
         try {
             for (String param : parameters) {
-                ArrayList<stock_detail> stocks = new ArrayList<>();
+                ArrayList<StockDetail> stocks = new ArrayList<>();
                 String source = "";
                 System.out.println(url + param);
                 source = get_1.doGet(url + param);
                 Thread.sleep(3500);
                 stocks = parse_2.parse(source);
-                for (stock_detail stock : stocks) {
+                for (StockDetail stock : stocks) {
                     if(!stockId_old.contains(stock.getSId())){
                         System.out.println(stock);
                         stockDetailMapper.insert(stock);

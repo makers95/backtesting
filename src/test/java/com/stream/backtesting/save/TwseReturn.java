@@ -2,8 +2,8 @@ package com.stream.backtesting.save;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stream.crawler.mapper.StockMapper;
-import com.stream.crawler.model.stock;
-import com.stream.crawler.model.stockEnum;
+import com.stream.crawler.model.Stock;
+import com.stream.crawler.model.StockEnum;
 import com.stream.crawler.read.get_1;
 import com.stream.crawler.parse.parse_1;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  **/
 
 @SpringBootTest
-public class twse_return {
+public class TwseReturn {
 
     @Resource
     private StockMapper stockMapper;
@@ -41,26 +41,25 @@ public class twse_return {
     //股市總加權指數
     @Test
     public void crawler() throws Exception {
-        get_1 get_1 = new get_1();
-        parse_1 parse_1 = new parse_1();
+
         String url = "https://www.twse.com.tw/indicesReport/MFI94U?response=html&date=";
         //產生參數陣列
         List<String> parameters = get_1.getParmaList(2003);
         //check repeat
-        QueryWrapper<stock> wrapper = new QueryWrapper<>();
-        wrapper.likeLeft("stockId", stockEnum.taiex_total_return.getStockCode());
-        List<stock> stocks_old = stockMapper.selectList(wrapper);
+        QueryWrapper<Stock> wrapper = new QueryWrapper<>();
+        wrapper.likeLeft("stockId", StockEnum.taiex_total_return.getStockCode());
+        List<Stock> stocks_old = stockMapper.selectList(wrapper);
 
-        Set<String> stockId_old = stocks_old.stream().map(stock -> stock.getSId()).collect(Collectors.toSet());
+        Set<String> stockId_old = stocks_old.stream().map(Stock -> Stock.getSId()).collect(Collectors.toSet());
 
         for (String param : parameters) {
-            ArrayList<stock> stocks = new ArrayList<>();
+            ArrayList<Stock> Stocks = new ArrayList<>();
             String source = "";
             System.out.println(url + param);
             source = get_1.doGet(url + param);
             Thread.sleep(3500);
-            stocks = parse_1.parseData_1(source);
-            for (stock stock : stocks) {
+            Stocks = parse_1.parseData_1(source);
+            for (Stock stock : Stocks) {
                 if(!stockId_old.contains(stock.getSId())){
                 stockMapper.insert(stock);
                 }

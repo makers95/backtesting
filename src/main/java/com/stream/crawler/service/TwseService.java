@@ -8,7 +8,7 @@ import com.stream.crawler.parse.parse_1;
  * @return $
  **/
 
-public interface crawlerService {
+public interface TwseService {
 
     void twseMonth(String yyyyMM01);
 }

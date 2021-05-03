@@ -81,7 +81,7 @@ public class get_1 {
         }
     }
 
-    public List<String> getParmaList(Integer start) {
+    public static List<String> getParmaList(Integer start) {
         Calendar cal = Calendar.getInstance();
         List<String> dateList = new ArrayList<>();
         for (int i = start; i <= cal.get(Calendar.YEAR); i++) {

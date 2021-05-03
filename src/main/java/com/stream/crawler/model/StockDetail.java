@@ -5,23 +5,25 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
-import java.util.Date;
+
 
 /**
- * @Description 簡易股市資料
+ * @Description
  * @Param $
  * @return $
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class stock {
+public class StockDetail {
     @TableId(value = "stockId",type = IdType.ASSIGN_ID)
     private String sId;
 
     private String name;
-    private Float price;
+    private Float price_open;
+    private Float price_high;
+    private Float price_low;
+    private Float price_end;
     private LocalDate date;
 }

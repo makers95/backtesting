@@ -1,7 +1,7 @@
 package com.stream.crawler.parse;
 
-import com.stream.crawler.model.stockEnum;
-import com.stream.crawler.model.stock_detail;
+import com.stream.crawler.model.StockEnum;
+import com.stream.crawler.model.StockDetail;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -21,16 +21,16 @@ public class parse_2 {
     public parse_2() {
     }
 
-    public static ArrayList<stock_detail> parse(String source) throws ParseException {
+    public static ArrayList<StockDetail> parse(String source) throws ParseException {
 
         Document doc = Jsoup.parse(source);
         Elements tds = doc.select("td");
 
-        ArrayList<stock_detail> stocks = new ArrayList<>();
+        ArrayList<StockDetail> stocks = new ArrayList<>();
 
         for (int i = 5; i < tds.size(); i = i + 5) {
             //跳過標題
-            stock_detail stock_detail = new stock_detail();
+            StockDetail StockDetail = new StockDetail();
 
             //原始資料
             String column_date = tds.get(i).text();
@@ -47,16 +47,16 @@ public class parse_2 {
             ChronoLocalDate taiwan_date = chrono.date(df.parse(column_date));
             LocalDate localDate = LocalDate.from(taiwan_date);
 
-            stock_detail.setDate(localDate);
+            StockDetail.setDate(localDate);
             Float price = Float.parseFloat(column_priceOpen.replace(",", ""));
-            stock_detail.setName("TAIEX");
-            stock_detail.setSId(localDate.toString().replace("-","")+stockEnum.taiex.getStockCode());
-            stock_detail.setPrice_open(Float.parseFloat(column_priceOpen.replace(",", "")));
-            stock_detail.setPrice_end(Float.parseFloat(column_priceEnd.replace(",", "")));
-            stock_detail.setPrice_high(Float.parseFloat(column_priceHigh.replace(",", "")));
-            stock_detail.setPrice_low(Float.parseFloat(column_priceLow.replace(",", "")));
+            StockDetail.setName("TAIEX");
+            StockDetail.setSId(localDate.toString().replace("-","")+ StockEnum.taiex.getStockCode());
+            StockDetail.setPrice_open(Float.parseFloat(column_priceOpen.replace(",", "")));
+            StockDetail.setPrice_end(Float.parseFloat(column_priceEnd.replace(",", "")));
+            StockDetail.setPrice_high(Float.parseFloat(column_priceHigh.replace(",", "")));
+            StockDetail.setPrice_low(Float.parseFloat(column_priceLow.replace(",", "")));
 
-            stocks.add(stock_detail);
+            stocks.add(StockDetail);
         }
         return stocks;
     }

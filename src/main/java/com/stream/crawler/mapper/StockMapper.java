@@ -1,7 +1,7 @@
 package com.stream.crawler.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.stream.crawler.model.stock;
+import com.stream.crawler.model.Stock;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  * @return $
  **/
 @Repository
-public interface StockMapper extends BaseMapper<stock> {
+public interface StockMapper extends BaseMapper<Stock> {
 }
